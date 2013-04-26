@@ -40,16 +40,6 @@ and a selection of other nastiness that plagues JavaScript.&lt;/p&gt;
     &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
   &lt;span class="nt"&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
 &lt;span class="nt"&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-
-    &lt;span class="nt"&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Jade&lt;span class="nt"&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Jade - node template engine&lt;span class="nt"&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;container&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-      &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;You are amazing&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;As you can see, this makes it easier to &amp;quot;see forest from the trees&amp;quot;, as the eye is not misdirected by stream of redundant characters and endless &lt;cite&gt;&amp;lt;div&amp;gt;&lt;/cite&gt;'s.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Brunch&lt;/strong&gt; is an &amp;quot;assembler&amp;quot; for HTML5 applications. It picks up all the pieces you have (CoffeeScript files, JADE templates, etc.) and produces a runnable web application out of that. It can watch the files on the background, compiling CoffeeScript files to JavaScript the second you save them, running unit tests immediately, refreshing the browser in real time etc.&lt;/p&gt;
