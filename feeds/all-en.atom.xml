@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Confusing Developers</title><link href="http://vivainio.github.io/" rel="alternate"></link><link href="http://vivainio.github.io/feeds/all-en.atom.xml" rel="self"></link><id>http://vivainio.github.io/</id><updated>2013-04-26T00:00:00+02:00</updated><entry><title>Creating Asha Web Apps with Brunch and Jade</title><link href="http://vivainio.github.io/asha-brunch-jade.html" rel="alternate"></link><updated>2013-04-26T00:00:00+02:00</updated><author><name>Ville Vainio</name></author><id>tag:vivainio.github.io,2013-04-26:asha-brunch-jade.html</id><summary type="html">&lt;div class="section" id="asha-web-apps"&gt;
+&lt;h2&gt;Asha web apps?&lt;/h2&gt;
+&lt;p&gt;Asha web apps are a lightweight application development framework for creating apps for low end Nokia devices (Asha series and earlier). While JME is the most popular technology for creating apps for Asha, web apps are a reasonably quick and convenient way to expose content on the web - basically, your garden variety front ends for restful services, spiced by some simple navigation.&lt;/p&gt;
+&lt;p&gt;Since Asha devices don't have local javascript execution, javascript is executed on proxy server. &amp;quot;Normal&amp;quot; web pages execute all javascript on the proxy, but Asha web apps provide some &amp;quot;shortcuts&amp;quot; for doing simple DOM manipulation (add/remove css classes, set values in input fields) without the proxy roundtrip. Check out &amp;quot;MWL&amp;quot; library for details.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="standard-workflow"&gt;
+&lt;h2&gt;Standard workflow&lt;/h2&gt;
+&lt;p&gt;Normally, you use Eclipse to develop and test Asha web apps. Nokia provides the &amp;quot;Nokia Web Tools&amp;quot; IDE for this; it's a rather mainstream Eclipse based IDE, spiced with webkit based &amp;quot;local&amp;quot; simulator (that runs javascript locally), and the &amp;quot;cloud&amp;quot; simulator that runs Javacript on the real Nokia proxy servers (but still renders the DOM on the webkit based simulator).&lt;/p&gt;
+&lt;p&gt;While this is fine for most web developers, there are lots of us relentlessly looking to optimize our workflows, to make it little more efficient, little more fun (or more tolerable, depending how bad an aversion you have for Javascript and HTML) and little more readable and maintainable.&lt;/p&gt;
+&lt;p&gt;For this kind of developer, there are tools like CoffeeScript, Brunch, Jade, SASS, LESS, HAML. In this exposition we'll use CoffeeScript, Brunch and Jade.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CoffeeScript&lt;/strong&gt; is a language that compiles to idiomatic and readable/debuggable JavaScript. It makes producing JavaScript more tolerable for people used to modern languages without semicolons, &lt;cite&gt;function&lt;/cite&gt; keywords
+and a selection of other nastiness that plagues JavaScript.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;JADE&lt;/strong&gt; in a language that compiles to HTML.&lt;/p&gt;
+&lt;p&gt;This Jade:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nt"&gt;doctype&lt;/span&gt; 5
+&lt;span class="nt"&gt;html&lt;/span&gt;(&lt;span class="na"&gt;lang=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;)
+  &lt;span class="nt"&gt;head&lt;/span&gt;
+    &lt;span class="nt"&gt;title&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pageTitle&lt;/span&gt;
+  &lt;span class="nt"&gt;body&lt;/span&gt;
+    &lt;span class="nt"&gt;h1&lt;/span&gt; Jade - node template engine
+    &lt;span class="nf"&gt;#container&lt;/span&gt;
+      &lt;span class="nt"&gt;if&lt;/span&gt; youAreUsingJade
+        &lt;span class="nt"&gt;p&lt;/span&gt; You are amazing
+      &lt;span class="nt"&gt;else&lt;/span&gt;
+        &lt;span class="nt"&gt;p&lt;/span&gt; Get on it!
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Compiles to this html:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;html&lt;/span&gt; &lt;span class="na"&gt;lang=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;head&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;html&lt;/span&gt; &lt;span class="na"&gt;lang=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;en&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Jade&lt;span class="nt"&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Jade - node template engine&lt;span class="nt"&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;container&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;You are amazing&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+
+    &lt;span class="nt"&gt;&amp;lt;title&amp;gt;&lt;/span&gt;Jade&lt;span class="nt"&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Jade - node template engine&lt;span class="nt"&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;div&lt;/span&gt; &lt;span class="na"&gt;id=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;container&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class="nt"&gt;&amp;lt;p&amp;gt;&lt;/span&gt;You are amazing&lt;span class="nt"&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As you can see, this makes it easier to &amp;quot;see forest from the trees&amp;quot;, as the eye is not misdirected by stream of redundant characters and endless &lt;cite&gt;&amp;lt;div&amp;gt;&lt;/cite&gt;'s.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Brunch&lt;/strong&gt; is an &amp;quot;assembler&amp;quot; for HTML5 applications. It picks up all the pieces you have (CoffeeScript files, JADE templates, etc.) and produces a runnable web application out of that. It can watch the files on the background, compiling CoffeeScript files to JavaScript the second you save them, running unit tests immediately, refreshing the browser in real time etc.&lt;/p&gt;
+&lt;p&gt;We use Brunch as the &amp;quot;skeleton&amp;quot; of our Asha web application.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="getting-started"&gt;
+&lt;h2&gt;Getting started&lt;/h2&gt;
+&lt;p&gt;Prerequisites: This flow has been tested on Linux and Windows. Have to install Node.js, git, the usual stuff every self respecting web developer has set up on day one. Anecdotal evidence suggests it's a good idea to compile Node.js from source instead of using the packaged versions, if you are lucky enough to be on Linux.&lt;/p&gt;
+&lt;p&gt;We clone the basic scaffolding from github and install the dependencies:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="nv"&gt;$ &lt;/span&gt;git clone git@github.com:vivainio/awa-brunch.git awa-helloworld
+&lt;span class="nv"&gt;$ &lt;/span&gt;&lt;span class="nb"&gt;cd &lt;/span&gt;awa-helloworld/
+&lt;span class="nv"&gt;$ &lt;/span&gt;npm install
+npm http GET https://registry.npmjs.org/javascript-brunch
+npm http GET https://registry.npmjs.org/css-brunch
+npm http GET https://registry.npmjs.org/uglify-js-brunch
+npm http GET https://registry.npmjs.org/clean-css-brunc
+.. etc ..
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This install Brunch, CoffeeScript compile and lots of other packages with npm.&lt;/p&gt;
+&lt;p&gt;Let's take a look at the project structure:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ville@ville-tp:~/p/awa-helloworld&lt;span class="nv"&gt;$ &lt;/span&gt;tree app
+app
+├── assets
+│   ├── config.xml
+│   ├── icon.png
+│   ├── index.html
+│   └── s40-theme
+│       ├── css
+│       │   ├── s40-theme.css
+│       │   ├── single_landscape.css
+│       │   └── single_portrait.css
+│       ├── images
+│       │   ├── arrow-close.png
+│       │   ├── arrow-open.png
+│       │   ├── back_40x40.png
+│       │   ├── button-bg_40x40.png
+│       │   ├── close_40x40.png
+│       │   ├── grid_40x40.png
+│       │   ├── option-menu_titlebar.png
+│       │   ├── refresh_40x40.png
+│       │   ├── search_40x40.png
+│       │   ├── tab_bg.png
+│       │   └── title-bar.png
+│       └── js
+│           ├── s40-theme.js
+│           └── screensize.js
+├── index.jade
+├── README.md
+├── templates
+│   └── mainlist.jade
+├── testCs.coffee
+└── testJs.js
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now, we start &amp;quot;brunch watch&amp;quot; that compiles the application in real time as we edit the files, and for added convenience launches a webserver serving on :3333:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ville@ville-tp:~/p/awa-helloworld&lt;span class="nv"&gt;$ &lt;/span&gt;brunch watch --server
+26 Apr 22:03:48 - info: application started on http://localhost:3333/
+26 Apr 22:03:48 - info: compiled in 115ms
+26 Apr 22:03:49 - info: compiled in 206ms
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The resulting application that we can deploy, or preview in browser, gets generated in awa-helloworld/public directory:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ville@ville-tp:~/p/awa-helloworld&lt;span class="nv"&gt;$ &lt;/span&gt;tree public
+public
+├── config.xml
+├── icon.png
+├── index.html
+├── javascripts
+│   ├── app.js
+│   ├── templates.js
+│   └── vendor.js
+├── js
+│   └── templates.js
+└── s40-theme
+    ├── css
+    │   ├── s40-theme.css
+    │   ├── single_landscape.css
+    │   └── single_portrait.css
+    ├── images
+    │   ├── arrow-close.png
+    │   ├── arrow-open.png
+    │   ├── back_40x40.png
+    │   ├── button-bg_40x40.png
+    │   ├── close_40x40.png
+    │   ├── grid_40x40.png
+    │   ├── option-menu_titlebar.png
+    │   ├── refresh_40x40.png
+    │   ├── search_40x40.png
+    │   ├── tab_bg.png
+    │   └── title-bar.png
+    └── js
+        ├── s40-theme.js
+        └── screensize.js
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&amp;quot;Sources&amp;quot; under app/ directory were processed to produce these files; .coffee files were compiled and concatenated to &amp;quot;app.js&amp;quot;, index.jade was converted to index.html, and so on.&lt;/p&gt;
+&lt;p&gt;There is one extra directory we didn't show yet, the &amp;quot;vendor&amp;quot; directory:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;ville@ville-tp:~/p/awa-helloworld&lt;span class="nv"&gt;$ &lt;/span&gt;tree vendor/
+vendor/
+├── jade_runtime.js
+└── README.md
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you are using JavaScript libraries like jQuery, you would just copy it under vendor/ and all of them get automatically concatenated to vendor.js. This makes the app fast to load as it reduces the amount of separate files to download. For production, Brunch can also minify the Javascript files to further reduce page weight. jade_runtime.js is here to support &lt;em&gt;precompiled Jade templates&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="shut-up-and-show-it-running"&gt;
+&lt;h2&gt;Shut up and show it running&lt;/h2&gt;
+&lt;p&gt;In the interest of making things as &amp;quot;familiar&amp;quot; and frictionless as possible, we will preview the application in standard Chrome browser instead of Nokia Web Tools. So we launch Chromium and disable web security to prevent CORS from cramping our style and killing our Ajax requests:&lt;/p&gt;
+&lt;blockquote&gt;
+$ chromium-browser --disable-web-security &lt;a class="reference external" href="http://localhost:3333"&gt;http://localhost:3333&lt;/a&gt;&lt;/blockquote&gt;
+&lt;p&gt;This doesn't look at all what you would expect on the phone screen, because we haven't specified a viewport size:&lt;/p&gt;
+&lt;img alt="/static/images/awa_chrome_raw.png" src="/static/images/awa_chrome_raw.png" /&gt;
+&lt;p&gt;Chromium inspector has a handy feature of overriding the viewport size (Settings -&amp;gt; Overrides -&amp;gt; Device Metrics), so we use it to set the resolution to match Asha Full Touch devices (240 x 400):&lt;/p&gt;
+&lt;img alt="/static/images/awa_chrome_device_metrics.png" src="/static/images/awa_chrome_device_metrics.png" /&gt;
+&lt;p&gt;Now, we have a low-fidelity representation of the phone experience! While this certainly wouldn't satisfy an UI designer, it's sufficient for a busy software developer that mostly needs to focus on the &amp;quot;logic&amp;quot; side of the web app.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="section" id="launching-in-nwt"&gt;
+&lt;h2&gt;Launching in NWT&lt;/h2&gt;
+&lt;p&gt;Now is the time to get this running with &amp;quot;real&amp;quot; IDE, i.e. Nokia Web Tools. Launch NWT, do File -&amp;gt; New -&amp;gt; Import web app, select public/config.xml and launch the application in local preview:&lt;/p&gt;
+&lt;img alt="/static/images/awa_nwt_1.png" src="/static/images/awa_nwt_1.png" /&gt;
+&lt;/div&gt;
+&lt;div class="section" id="is-this-it"&gt;
+&lt;h2&gt;Is this it?&lt;/h2&gt;
+&lt;p&gt;There is more to show: how to utilize precompiled templates, how to inject the MWL library, and how Jade can help you create MWL UI &amp;quot;components&amp;quot; with reusable, encapsulated logic. These, and other things to smoothen the development flow will be covered in another blog post, as this already got way too long.&lt;/p&gt;
+&lt;/div&gt;
+</summary><category term="asha"></category><category term="webdev"></category></entry></feed>
